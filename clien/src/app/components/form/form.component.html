@@ -1,0 +1,40 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+<mat-form-field>
+  <input matInput placeholder="label" type="text" name="phoneNumber" ngModel required>
+</mat-form-field>
+<button  mat-raised-button [disabled]="!f.valid">Validate Number</button>
+</form>
+<mat-spinner style="margin: auto;" diameter=250 *ngIf="isLoading"></mat-spinner>
+
+<mat-card *ngIf="apiResponse">
+  <mat-card-header>
+    <mat-card-title style="display: block;">Feedback @ {{apiResponse.date_created | date:"MM/dd/yy"}}
+        <br>
+      <ng-container *ngIf="apiResponse.valid; else elseTemplate">
+        <span style="color:greenyellow">Valid Number</span>
+
+        </ng-container>
+        <ng-template #elseTemplate>
+          <span style="color: red;">Not Vlaid</span>
+
+        </ng-template>
+
+    </mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+
+<h4>number:{{apiResponse.number}}</h4>
+<h4>localFormat:{{apiResponse.local_format}}</h4>
+<h4>international_format:{{apiResponse.international_format}}</h4>
+<h4>country_prefix:{{apiResponse.country_prefix}}</h4>
+<h4>country_code:{{apiResponse.country_code}}</h4>
+<h4>country_name:{{apiResponse.country_name}}</h4>
+<h4>location:{{apiResponse.country_prefix}}</h4>
+<h4>carrier:{{apiResponse.carrier}}</h4>
+<h4>lineType:{{apiResponse.line_type}}</h4>
+<h4>carrier:{{apiResponse.carrier}}</h4>
+  </mat-card-content>
+
+</mat-card>
+
